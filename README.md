@@ -1,2 +1,2 @@
-# cs344-food
-CS344 Project B - Improving Food
+# cs361-food
+CS361 Project B - Improving Food
