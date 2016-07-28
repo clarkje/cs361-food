@@ -1,0 +1,59 @@
+#!/usr/bin/env php
+/home/ubuntu/workspace/cs361-food/test/manufacturer_test.php:5:
+string(9) "127.0.0.1"
+	
+PHPUnit 3.6.10 by Sebastian Bergmann.
+
+/home/ubuntu/workspace/cs361-food/manufacturer.php:90:
+string(204) "INSERT INTO manufacturer (
+                        name, 
+                        phone_number, 
+                        email, 
+                        website_url 
+                    ) VALUES (?,?,?,?)"
+/home/ubuntu/workspace/cs361-food/manufacturer.php:116:
+int(12)
+/home/ubuntu/workspace/cs361-food/test/manufacturer_test.php:43:
+class Manufacturer#202 (5) {
+  public $id =>
+  int(12)
+  public $name =>
+  string(3) "Foo"
+  public $phone_number =>
+  string(12) "123-456-7890"
+  public $email =>
+  string(11) "foo@bar.com"
+  public $website_url =>
+  string(19) "http://www.foo.com/"
+}
+/home/ubuntu/workspace/cs361-food/test/manufacturer_test.php:45:
+class Manufacturer#201 (5) {
+  public $id =>
+  int(12)
+  public $name =>
+  string(3) "Foo"
+  public $phone_number =>
+  string(12) "123-456-7890"
+  public $email =>
+  string(11) "foo@bar.com"
+  public $website_url =>
+  string(19) "http://www.foo.com/"
+}
+
+Fatal error: Call to undefined method ManufacturerTest::qassertEquals() in /home/ubuntu/workspace/cs361-food/test/manufacturer_test.php on line 50
+
+Call Stack:
+    0.0001     229768   1. {main}() /home/ubuntu/workspace/cs361-food/vendor/eher/phpunit/bin/phpunit:0
+    0.0028     330048   2. require_once('/home/ubuntu/workspace/cs361-food/vendor/eher/phpunit/src/phpunit/phpunit.php') /home/ubuntu/workspace/cs361-food/vendor/eher/phpunit/bin/phpunit:5
+    0.0140     657600   3. PHPUnit_TextUI_Command::main() /home/ubuntu/workspace/cs361-food/vendor/eher/phpunit/src/phpunit/phpunit.php:46
+    0.0140     658304   4. PHPUnit_TextUI_Command->run() /home/ubuntu/workspace/cs361-food/vendor/eher/phpunit/src/phpunit/PHPUnit/TextUI/Command.php:130
+    0.1624    2182576   5. PHPUnit_TextUI_TestRunner->doRun() /home/ubuntu/workspace/cs361-food/vendor/eher/phpunit/src/phpunit/PHPUnit/TextUI/Command.php:192
+    0.1650    2461464   6. PHPUnit_Framework_TestSuite->run() /home/ubuntu/workspace/cs361-food/vendor/eher/phpunit/src/phpunit/PHPUnit/TextUI/TestRunner.php:325
+    0.1651    2462480   7. PHPUnit_Framework_TestSuite->runTest() /home/ubuntu/workspace/cs361-food/vendor/eher/phpunit/src/phpunit/PHPUnit/Framework/TestSuite.php:745
+    0.1651    2463112   8. PHPUnit_Framework_TestCase->run() /home/ubuntu/workspace/cs361-food/vendor/eher/phpunit/src/phpunit/PHPUnit/Framework/TestSuite.php:772
+    0.1651    2464584   9. PHPUnit_Framework_TestResult->run() /home/ubuntu/workspace/cs361-food/vendor/eher/phpunit/src/phpunit/PHPUnit/Framework/TestCase.php:751
+    0.1687    2523832  10. PHPUnit_Framework_TestCase->runBare() /home/ubuntu/workspace/cs361-food/vendor/eher/phpunit/src/phpunit/PHPUnit/Framework/TestResult.php:649
+    0.1704    2653112  11. PHPUnit_Framework_TestCase->runTest() /home/ubuntu/workspace/cs361-food/vendor/eher/phpunit/src/phpunit/PHPUnit/Framework/TestCase.php:804
+    0.1704    2653888  12. ReflectionMethod->invokeArgs() /home/ubuntu/workspace/cs361-food/vendor/eher/phpunit/src/phpunit/PHPUnit/Framework/TestCase.php:942
+    0.1704    2654320  13. ManufacturerTest->testAdd() /home/ubuntu/workspace/cs361-food/vendor/eher/phpunit/src/phpunit/PHPUnit/Framework/TestCase.php:942
+
