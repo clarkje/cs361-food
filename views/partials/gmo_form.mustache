@@ -1,0 +1,33 @@
+  <!--This portion displays the GMO Submit box. -->
+        <div class="col-sm-offset-1 col-sm-10">
+            <h2>Add New GMO</h2>
+            <hr>
+            <form method="post" action="addgmo.php" class="form">
+              <div class="form-group"> 
+                <label for="input_man">Manufacturer</label>
+                <select class="form-control" name="m_id">
+                {{#man}}
+                <option value="{{id}}">{{name}}</option>
+                {{/man}}
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="input_name">Name:</label>
+                <input type="text" name="name" class="form-control" id="input_name" placeholder="Name">
+              </div>
+              <div class="form-group">
+                <label for="input_sname">Scientific Name:</label>
+                <input type="text" name="sci_name" class="form-control" id="input_sname" placeholder="Scientific Name">
+              </div>
+              <div class="form-group">
+                <label for="input_type">Type:</label>
+                <input type="text" name="type" class="form-control" id="input_type" placeholder="Type">
+              </div>
+              <div class="form-group">
+                <label for="input_desc">Description:</label>
+                <textarea name="desc" id="input_desc" class="form-control" placeholder="Description"></textarea>
+              </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+        

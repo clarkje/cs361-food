@@ -114,5 +114,44 @@ class Manufacturer {
         // $stmt->close();
         return $this->id;
     }
+
+    /**
+     * getManufacturers($mysqli)
+     * 
+     * Returns an array of manufacturer objects
+     * TODO: If we're going to add moderation, this will need to have an active parameter
+     */
+    
+    function getManufacturers($mysqli) { 
+     
+     $manArray = array();
+     
+     $query = "SELECT   
+                    id,
+                    name, 
+                    phone_number,
+                    email, 
+                    website_url FROM manufacturer"; 
+                    
+        if(!($stmt = $mysqli->prepare($query))) { 
+            echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;    
+        }
+    
+    
+        $stmt->execute(); 
+        $stmt->bind_result($id, $name, $phone_number, $email, $website_url);
+        while($stmt->fetch()){
+
+            $man = new Manufacturer;
+            $man->id = $id; 
+            $man->name = $name;
+            $man->phone_number = $phone_number;
+            $man->email = $email; 
+            $man->website_url = $website_url;
+            $manArray[] = $man;
+        }
+        $stmt->close();
+        return $manArray;
+    }
 }
 ?>
