@@ -37,17 +37,17 @@ class Manufacturer {
         if(!($stmt = $mysqli->prepare($query))) { 
             echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;    
         }
-        $stmt -> bind_param("i", $id);
+        $stmt->bind_param("i", $id);
         $stmt->execute(); 
         $stmt->bind_result($this->id, $this->name, $this->phone_number, $this->email, $this->website_url);
         $stmt->fetch();
         $stmt->store_result();
-        
+         
         if ($stmt->error) { 
-            $stmt->close();
+            // $stmt->close();
             return $stmt->error;
         } else { 
-            $stmt->close();
+            // $stmt->close();
             return $this;
         }
     }
@@ -109,10 +109,10 @@ class Manufacturer {
         } 
             
         $stmt->execute(); 
-        $this->id = $stmt->insert_id; 
+        $this->id = $mysqli->insert_id; 
 
-        $stmt->close();
-        
+        // $stmt->close();
         return $this->id;
     }
 }
+?>

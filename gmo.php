@@ -27,7 +27,7 @@ class GMO {
      * Postconditions: None
      */
 
-    function get($mysqli, $id = NULL) { 
+    function get($mysqli, $id) { 
        
        $query = "SELECT 
                     id, 
@@ -36,31 +36,27 @@ class GMO {
                     sci_name, 
                     description, 
                     type 
-                FROM gmo
-       "; 
-       
-       if ($id != NULL) { 
-    
-            $query += " WHERE id = (?)"; 
+                FROM gmo WHERE id = (?)"; 
 
-            // Just dump the error to the screen.... it's school.
-            if(!($stmt = $mysqli->prepare($query))) { 
-                echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;    
-            }
-            $stmt -> bind_param("i", $id);
-       }
-
+        // Just dump the error to the screen.... it's school.
+        if(!($stmt = $mysqli->prepare($query))) { 
+            echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;    
+        }
+            
+            
+        $stmt->bind_param("i", $id);
         $stmt->execute(); 
         $stmt->bind_result($this->id, $this->m_id, $this->name, $this->sci_name, $this->description, $this->type); 
-        // $stmt->store_result();
-        $stmt->close();
+        $stmt->fetch();
+        $stmt->store_result();
         
         if ($stmt->error) { 
+        //    $stmt->close();
             return $stmt->error;
         } else { 
+        //    $stmt->close();
             return $this;
         }        
-
     }
     
     /**
@@ -97,7 +93,7 @@ class GMO {
                                     $this->sci_name, 
                                     $this->description, 
                                     $this->type
-                                    );        
+                                    );
         } else { 
             
             $query = "UPDATE gmo SET 
@@ -111,7 +107,8 @@ class GMO {
             if(!($stmt = $mysqli->prepare($query))) { 
                 echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;    
             }
-            $stmt -> bind_param("issss", 
+            
+            $stmt -> bind_param("issssi", 
                                     $this->m_id, 
                                     $this->name, 
                                     $this->sci_name, 
@@ -121,10 +118,11 @@ class GMO {
                                     );        
         } 
             
-        $stmt->execute(); 
-        $stmt->close();
-            
-        return;
+        $stmt->execute();
+        $this->id = $mysqli->insert_id;
+        
+        // $stmt->close();
+        return $this->id;
     }
 }
 ?>

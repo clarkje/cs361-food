@@ -1,2 +1,4 @@
-
+composer.lock
+/tmp/*
+/vendor/*
 conf/mysql.php

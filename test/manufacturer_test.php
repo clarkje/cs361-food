@@ -35,7 +35,7 @@ class ManufacturerTest extends PHPUnit_Framework_TestCase {
 	        }
 	        $stmt->bind_param("i", $insert_id);
 	        $stmt->execute(); 
-	        $stmt->close();                        
+	        // $stmt->close();                        
 			$this->mysqli->close();	
 		}
 	}

@@ -2,6 +2,7 @@
 	"require": { 
 		"EHER/PHPUnit": "1.6",
 		"mustache/mustache": "^2.10",
-		"twbs/bootstrap": "3.3.7"
+		"twbs/bootstrap": "^3.3",
+		"components/jquery": "^3.1"
 	}
 }
