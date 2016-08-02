@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>{{title}}</title>
+        <!-- putting in the format for the webpage -->
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    
+    
+    <body>
+        <!--Display GMO Info -->
+        <h1>GMO Info</h1>   
+        {{>gmo}}
+        
+        <!--Display Mfg. Info -->
+        <h1>Manufacturer Info</h1> 
+        {{>manufacturer}}
+        
+        <!--Separating Display Info from Input Section -->
+        <br> <hr> <br>
+        
+        <!--This portion displays the GMO Submit box. -->
+        <div>
+            <form method="post" action="TESTING.html"> <!-- This needs updated with real path -->
+                <fieldset>
+                    <legend>GMO Submit:</legend>
+                        <label for="input_name" class="text">Name:</label>
+                        <input type="text" name="name" class="box" id="input_name">
+                    <br>
+                        <label for="input_sname"class="text">Scientific Name:</label>
+                        <input type="text" name="sci_name" class="box" id="input_sname">
+                    <br>
+                        <label for="input_type" class="text">Type:</label>
+                        <input type="text" name="type" class="box" id="input_type">
+                    <br>
+                        <label for="input_desc" class="text">Description:</label>
+                        <textarea name="desc" id="input_desc" class="box"></textarea>
+                    <br>
+                    <input type="submit" value="Submit">
+                </fieldset>
+            </form>
+        </div>
+        
+    </body>
+    
+</html>

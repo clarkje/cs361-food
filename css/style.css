@@ -1,0 +1,14 @@
+body {
+    background-color: #E3FCFC;
+    font-family: Arial; 
+}
+
+.text {
+     display: inline-block;
+     width: 15%;
+     text-align: right;
+ }
+
+.box{
+    display: inline-block;
+}
