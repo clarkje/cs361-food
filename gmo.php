@@ -3,7 +3,7 @@
 class GMO { 
     
     var $id;            // Unique ID
-    var $m_id;          // Parent manufacturer's unqiue ID
+    var $m_id;          // Parent manufacturer's unique ID
     var $name;          // Name of the GMO
     var $sci_name;      // Scientific Name
     var $description; 
@@ -15,6 +15,67 @@ class GMO {
       $this->id = NULL; 
       $this->m_id = NULL;
     }
+    
+    
+    /**
+     * function getAll($mysqli, $active)
+     *
+     * Returns an array of GMO objects
+     *
+     * Parameter active
+     * -1 - Return all GMOs [default]
+     * 0 - Return only inactive GMOs
+     * 1 - Return only active GMOs
+     */ 
+     
+     function getAll($mysqli, $active = -1) { 
+         
+         $gmoArray = array(); // Store the array of GMO results
+         
+         $query = "SELECT 
+                        id, 
+                        m_id,
+                        name, 
+                        sci_name, 
+                        description,
+                        type,
+                        active
+                    FROM gmo"; 
+                  
+        if ($active == 0) {             
+         $query .= " WHERE active IS FALSE";
+        } else if ($active == 1) { 
+         $query .= " WHERE active IS TRUE";
+        }
+
+        // Just dump the error to the screen.... it's school.
+        if(!($stmt = $mysqli->prepare($query))) { 
+            echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;    
+        }
+            
+            
+        $stmt->execute(); 
+        $stmt->bind_result($id, $m_id, $name, $sci_name, $description, $type, $active); 
+        
+        while($stmt->fetch()) { 
+         $gmo = new GMO; 
+         $gmo->id = $id; 
+         $gmo->m_id = $m_id;
+         $gmo->name = $name;
+         $gmo->sci_name = $sci_name;
+         $gmo->description = $description;
+         $gmo->type = $type;
+         $gmo->active = $active; 
+         $gmoArray[] = $gmo;   
+        }
+
+        if ($mysqli->error) { 
+            return $mysqli->error;
+        } else { 
+            return $gmoArray;
+        }                
+     }
+    
     
     /** 
      * function get($mysqli, $id)
