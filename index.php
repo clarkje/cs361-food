@@ -43,16 +43,16 @@ if ($mysqli->connect_errno) {
 }
 
 $gmo = New GMO();  
-$gmo->get($mysqli, 7); 
+$gmoArray = $gmo->getAll($mysqli, 1); 
 
-$man = New Manufacturer();
-$man->get($mysqli, 79);
-
+// We'll just associate the manufacturer as a property of each GMO object for easy display
+foreach($gmoArray as $gmo) { 
+ $gmo->man = new Manufacturer(); 
+ $gmo->man = $gmo->man->get($mysqli, $gmo->m_id); 
+}
 
 // You put whatever you want show in the template in $context
-$context['gmo'] = $gmo;
-$context['man'] = $man;
-
+$context['gmo'] = $gmoArray;
 
 $tpl = $mustache->loadTemplate('index.mustache');
 echo $tpl->render($context);

@@ -1,0 +1,21 @@
+<div class="col-sm-offset-1 col-sm-10">
+<h3>Active GMOs</h3>
+
+ <div class="table-responsive">
+ <table class="table table-striped">
+  {{#gmo}}
+  <tr>
+   <td>
+    <b>{{name}}</b> - Type: {{type}}<br>
+    <i>{{sci_name}}</i><br><br>
+    Manufactured By: {{man.name}} 
+    Description:<br>
+    {{description}}
+   </td> 
+  </tr>
+  {{/gmo}}
+ </table>
+</div>
+<p>
+</p>
+</div>

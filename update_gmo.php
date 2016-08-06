@@ -1,5 +1,4 @@
 <?php
-// Processes form submission and adds a GMO to the database
 
 // Git .ignore excludes conf/mysql.php, because credentials don't belong in source control
 include 'conf/mysql.php';
@@ -43,31 +42,23 @@ if ($mysqli->connect_errno) {
 	echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
 }
 
-/*
 $gmo = New GMO();  
 $gmo->m_id = $_POST['m_id']; 
 $gmo->name = $_POST['name'];
 $gmo->sci_name = $_POST['sci_name']; 
-$gmo->description = $_POST['description'];
+$gmo->description = $_POST['desc'];
 $gmo->type = $_POST['type'];
-$insert_id = $gmo->set($mysqli);
+$gmo->active = $_POST['active'];
+$gmo->set($mysqli);
 
+if ($mysqli->error) { 
+    $contex['error'] = $mysqli->error; 
+}
+    
 // You put whatever you want show in the template in $context
-// Just pull this back out of the database to ensure what we print is what we stored. 
-$gmo = $gmo->get($mysqli, $insert_id);
-
-// If the query fails, we'll pass the error to the template
-// This is a hacky way to do it.  The class should probably raise an exception or send back an error object.
-$context['error'] = mysqli_error($mysqli);  
 $context['gmo'] = $gmo;
-*/ 
+$context['update'] = true;      // Hint to the UI that we want the update variant strings
 
-$man = new Manufacturer;
-$manArray = $man->getManufacturers($mysqli);
-$context['man'] = $manArray;
-
-$tpl = $mustache->loadTemplate('newgmo.mustache');
+$tpl = $mustache->loadTemplate('update_gmo.mustache');
 echo $tpl->render($context);
 ?>
-
-

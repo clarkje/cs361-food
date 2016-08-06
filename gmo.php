@@ -74,6 +74,7 @@ class GMO {
         } else { 
             return $gmoArray;
         }                
+        
      }
     
     
@@ -96,7 +97,8 @@ class GMO {
                     name, 
                     sci_name, 
                     description, 
-                    type 
+                    type, 
+                    active
                 FROM gmo WHERE id = (?)"; 
 
         // Just dump the error to the screen.... it's school.
@@ -107,7 +109,7 @@ class GMO {
             
         $stmt->bind_param("i", $id);
         $stmt->execute(); 
-        $stmt->bind_result($this->id, $this->m_id, $this->name, $this->sci_name, $this->description, $this->type); 
+        $stmt->bind_result($this->id, $this->m_id, $this->name, $this->sci_name, $this->description, $this->type, $this->active); 
         $stmt->fetch();
         $stmt->store_result();
         
@@ -162,20 +164,22 @@ class GMO {
                         name = ?, 
                         sci_name = ?, 
                         description = ?, 
-                        type = ? 
+                        type = ?, 
+                        active = ? 
                       WHERE id = ?"; 
                       
             if(!($stmt = $mysqli->prepare($query))) { 
                 echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;    
             }
             
-            $stmt -> bind_param("issssi", 
+            $stmt -> bind_param("issssii", 
                                     $this->m_id, 
                                     $this->name, 
                                     $this->sci_name, 
                                     $this->description, 
                                     $this->type, 
-                                    $this->id 
+                                    $this->id, 
+                                    $this->active
                                     );        
         } 
             

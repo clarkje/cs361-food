@@ -2,12 +2,12 @@
 
 class Manufacturer { 
  
-    var $id;     // Unique ID
-    var $name;   
+    var $id;                // Unique ID assigned by MySQL
+    var $name;              
     var $phone_number;
     var $email;
     var $website_url; 
-    
+
     function Manufacturer() { 
          $this->id = null;   
     }

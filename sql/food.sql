@@ -29,10 +29,12 @@ CREATE TABLE `gmo` (
   `sci_name` varchar(255) NOT NULL,
   `description` text,
   `type` varchar(255) NOT NULL,
+  `active` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
+  UNIQUE KEY `uc_Name` (`name`),
   KEY `m_id` (`m_id`),
   CONSTRAINT `gmo_ibfk_1` FOREIGN KEY (`m_id`) REFERENCES `manufacturer` (`id`) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +43,7 @@ CREATE TABLE `gmo` (
 
 LOCK TABLES `gmo` WRITE;
 /*!40000 ALTER TABLE `gmo` DISABLE KEYS */;
+INSERT INTO `gmo` VALUES (31,79,'I. Potato','Potatoes','Potatoes that won\'t brown as fast. Healthier.','GM Crop',1);
 /*!40000 ALTER TABLE `gmo` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,8 +60,10 @@ CREATE TABLE `manufacturer` (
   `phone_number` varchar(50) NOT NULL,
   `email` varchar(255) NOT NULL,
   `website_url` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uc_Name` (`name`),
+  UNIQUE KEY `uc_PhoneNumber` (`phone_number`)
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +72,7 @@ CREATE TABLE `manufacturer` (
 
 LOCK TABLES `manufacturer` WRITE;
 /*!40000 ALTER TABLE `manufacturer` DISABLE KEYS */;
-INSERT INTO `manufacturer` VALUES (20,'Foo','123-456-7890','foo@bar.com','http://www.foo.com/'),(21,'Foo','123-456-7890','foo@bar.com','http://www.foo.com/'),(23,'Foo','123-456-7890','foo@bar.com','http://www.foo.com/'),(25,'Foo','123-456-7890','foo@bar.com','http://www.foo.com/'),(27,'Foo','123-456-7890','foo@bar.com','http://www.foo.com/'),(29,'Foo','123-456-7890','foo@bar.com','http://www.foo.com/'),(31,'Foo','123-456-7890','foo@bar.com','http://www.foo.com/');
+INSERT INTO `manufacturer` VALUES (79,'MONGO CORP PTY LTD','+1 403-421-1234','donotreply@mongocorp.com','http://www.mongocorpptyltd.co.uk');
 /*!40000 ALTER TABLE `manufacturer` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -80,4 +85,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-07-28 18:38:06
+-- Dump completed on 2016-08-06 23:05:37
