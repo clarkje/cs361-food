@@ -5,7 +5,7 @@
                   <legend><h1>Request Info</h1></legend>
                   <div class="form-group">
                       <label for="name">Name:</label>
-                      <input id="name" type="text" class="form-control">
+                      <input id="name" name="name" type="text" class="form-control">
                   </div>
                   <!-- Authentication is future story.  
                   <div class="form-group">
@@ -15,7 +15,7 @@
                   -->
                   <div class="form-group">
                   <label id="gmo_label" for="gmo">GMO Manufacturer</label>
-                  <select id="gmo" name="gmo" class="form-control">
+                  <select id="gmo" name="man" class="form-control">
                       {{#man}}
                         <option value="{{id}}">{{name}}</option>
                       {{/man}}
@@ -25,7 +25,7 @@
                   <label for="message">Message:</label>
                   <textarea name="message" id="message" class="form-control" placeholder="Enter your message."></textarea>
                   </div>
-    
+                 <button type="submit" class="btn btn-default">Submit</button>
               </fieldset>
           </form>
       </div>

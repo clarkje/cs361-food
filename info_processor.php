@@ -42,12 +42,13 @@ if ($mysqli->connect_errno) {
 	echo "Connection error " . $mysqli->connect_errno . " " . $mysqli->connect_error;
 }
 
-$gmo = New GMO();  
+$man = new Manufacturer(); 
+$man->get($mysqli, $_POST['man']);
 
 $context['name'] = $_POST['name'];
-$context['gmo'] = $gmo->get($mysqli, $_POST['gmo']); 
+$context['man'] = $man;
 $context['message'] = $_POST['message'];
 
-$tpl = $mustache->loadTemplate('index.mustache');
+$tpl = $mustache->loadTemplate('info_processor.mustache');
 echo $tpl->render($context);
 ?>

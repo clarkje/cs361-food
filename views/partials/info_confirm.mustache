@@ -1,24 +1,26 @@
-<div class="col-sm-offset-1 col-sm-10">
-<h2>GMO Info</h2>   
+<h3>Information Request</h3>
 
+<br><br>
 <div class="col-sm-offset-1 col-sm-10">
     {{#error}}
      <p class="alert alert-danger">{{error}}</p>
     {{/error}}
     {{^ error}}
-     <p class="alert alert-success"Information Request Sent</p>
+     <p class="alert alert-success">Your Information Request Was Sent Successfully</p>
     {{/ error }}
 </div>
 
+<div class="col-sm-offset-1 col-sm-10">
 <p>
-{{name}}<br>
-{{gmo.name}}<br>
+From: {{name}}<br>
+To: {{man.name}}<br>
+</p>
 
+Message:
 <blockquote>
 <p>
 {{message}}    
 </p>
 </blockquote>
 
-</p>
 </div>
