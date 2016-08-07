@@ -56,7 +56,6 @@ $gmo = $gmo->get($mysqli, $insert_id);
 
 // If the query fails, we'll pass the error to the template
 // This is a hacky way to do it.  The class should probably raise an exception or send back an error object.
-$context['error'] = $mysqli->error;  
 $context['gmo'] = $gmo;
 $context['man'] = $man;
 
