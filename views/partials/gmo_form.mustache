@@ -4,6 +4,8 @@
             <h3>{{#gmo}}Edit{{/gmo}}{{^gmo}}Add New{{/gmo}} GMO</h3>
             <hr>
             <form method="post" action="{{#gmo}}update_gmo.php{{/gmo}}{{^gmo}}addgmo.php{{/gmo}}" class="form">
+            {{#gmo}}<input type="hidden" name="id" value="{{id}}">{{/gmo}}
+
               <div class="form-group"> 
                 <label for="input_man">Manufacturer</label>
                 <select class="form-control" name="m_id">

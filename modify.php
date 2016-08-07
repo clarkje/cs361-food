@@ -43,7 +43,7 @@ if ($mysqli->connect_errno) {
 }
 
 $gmo = new GMO(); 
-$gmoArray = $gmo->getAll($mysqli, 1);
+$gmoArray = $gmo->getAll($mysqli, -1);
 
 // You put whatever you want show in the template in $context
 $context['gmo']= $gmoArray;

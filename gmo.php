@@ -178,14 +178,16 @@ class GMO {
                                     $this->sci_name, 
                                     $this->description, 
                                     $this->type, 
-                                    $this->id, 
-                                    $this->active
+                                    $this->active,
+                                    $this->id
                                     );        
         } 
-            
+        
+
+        
         $stmt->execute();
         $this->id = $mysqli->insert_id;
-        
+
         // $stmt->close();
         return $this->id;
     }

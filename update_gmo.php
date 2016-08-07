@@ -43,6 +43,7 @@ if ($mysqli->connect_errno) {
 }
 
 $gmo = New GMO();  
+$gmo->id = $_POST['id'];
 $gmo->m_id = $_POST['m_id']; 
 $gmo->name = $_POST['name'];
 $gmo->sci_name = $_POST['sci_name']; 
@@ -51,13 +52,20 @@ $gmo->type = $_POST['type'];
 $gmo->active = $_POST['active'];
 $gmo->set($mysqli);
 
-if ($mysqli->error) { 
-    $contex['error'] = $mysqli->error; 
+$man = New Manufacturer();
+$manArray = $man->getManufacturers($mysqli);
+
+// Mark the manufacturer associated with the GMO as selected
+// We'll look for the selected property in the template to make the UI distinctions... 
+for ($i = 0; $i < count($manArray); $i++) { 
+    if($manArray[$i]->id == $gmo->m_id) { 
+        $manArray[$i]->selected = 1;   
+    }
 }
-    
 // You put whatever you want show in the template in $context
 $context['gmo'] = $gmo;
-$context['update'] = true;      // Hint to the UI that we want the update variant strings
+$context['man'] = $manArray;    
+$context['update'] = true;
 
 $tpl = $mustache->loadTemplate('update_gmo.mustache');
 echo $tpl->render($context);
