@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css">
   <script src="vendor/components/jquery/jquery.min.js"></script>
   <script src="vendor/twbs/bootstrap/dist/js/bootstrap.min.js"></script>
- {{>css}}
+  {{>css}}
 </head>
 <body>
 
@@ -52,13 +52,11 @@
       -->
     </div>
     <div class="col-sm-8 text-left" id="maincol">
-        
-        <!--Display GMO Info -->
-        {{>gmo}}
-
+        <!--Display the GMO that we saved -->
+        {{>man_form}}
     </div>
     <div class="col-sm-2 sidenav">
-      <!-- Ads on the side -- disabled
+      <!--
       <div class="well">
         <p>ADS</p>
       </div>

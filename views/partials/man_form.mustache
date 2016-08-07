@@ -1,0 +1,41 @@
+  <!-- gmo_form.mustache -->
+        <div class="col-sm-offset-1 col-sm-10">
+          {{#error}}
+           <p class="alert alert-danger">{{error}}</p>
+          {{/error}}
+          {{^ error}}
+            {{#man}}
+               <p class="alert alert-success">Manufacturer {{#update}}Updated{{/update}}{{^update}}Added{{/update}} Successfully</p>
+            {{/man}}
+          {{/ error }}
+        </div>
+
+        <div class="col-sm-offset-1 col-sm-10">
+            <h3>{{#man}}Edit{{/man}}{{^man}}Add New{{/man}} Manufacturer</h3>
+            <hr>
+            <form method="post" action="addman.php" class="form">
+              {{#man}}<input type="hidden" name="id" value="{{id}}">{{/man}}
+              
+              <div class="form-group">
+                <label for="input_name">Name:</label>
+                <input type="text" name="name" class="form-control" id="input_name" placeholder="Name" {{#man}}value="{{name}}"{{/man}}>
+              </div>
+              <div class="form-group">
+                <label for="input_pn">Phone Number:</label>
+                <input type="text" name="phone_number" class="form-control" id="input_ph" placeholder="Phone Number" {{#man}}value="{{phone_number}}"{{/man}}>
+              </div>
+              <div class="form-group">
+                <label for="input_email">Email Address:</label>
+                <input type="text" name="email" class="form-control" id="input_email" placeholder="Email Address" {{#man}}value="{{email}}"{{/man}}>
+              </div>
+              <div class="form-group">
+                <label for="input_url">Website URL:</label>                
+                <input type="text" name="website_url" class="form-control" id="input_url" placeholder="Website URL:" {{#man}}value="{{website_url}}"{{/man}}>
+              </div>
+
+            <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+      
+      
+      <!-- /gmo_form.mustache -->
