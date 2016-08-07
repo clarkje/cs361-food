@@ -26,17 +26,19 @@ class ManufacturerTest extends PHPUnit_Framework_TestCase {
 
 	public function tearDown() { 
 		
-		while ($insert_id = array_pop($this->insert_ids)) { 
-			
-			$query = "DELETE FROM manufacturer WHERE id = (?)";
-			
-			if(!($stmt = $this->mysqli->prepare($query))) { 
-	                echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;    
-	        }
-	        $stmt->bind_param("i", $insert_id);
-	        $stmt->execute(); 
-	        // $stmt->close();                        
-			$this->mysqli->close();	
+		foreach($this->insert_ids AS $insert_id) { 
+			if ($insert_id > 0) { 
+				$query = "DELETE FROM manufacturer WHERE id = (?)";
+				
+				if(!($stmt = $this->mysqli->prepare($query))) { 
+		                echo "Prepare failed: " . $stmt->errno . " " . $stmt->error;    
+		        }
+		        $stmt->bind_param("i", $insert_id);
+		        $stmt->execute(); 
+		        // $stmt->close();                        
+				$this->mysqli->close();	
+		
+			}
 		}
 	}
 
@@ -44,8 +46,8 @@ class ManufacturerTest extends PHPUnit_Framework_TestCase {
 	public function testAdd() {
 		
 		$man1 = new Manufacturer(); 
-		$man1->name = "Foo"; 
-		$man1->phone_number = "123-456-7890"; 
+		$man1->name = "Foo - " . microtime();  // We need unique names 
+		$man1->phone_number = "123-456-7890 " . microtime(); // We need unique phones
 		$man1->email = "foo@bar.com";
 		$man1->website_url = "http://www.foo.com/";
 		$insert_id = $man1->set($this->mysqli); 
@@ -62,7 +64,6 @@ class ManufacturerTest extends PHPUnit_Framework_TestCase {
 	}
 	
 	// You shouldn't be able to add a duplicate manufacturer	
-	
 	public function testDup() { 
 		
 		$man1 = new Manufacturer(); 
@@ -81,8 +82,61 @@ class ManufacturerTest extends PHPUnit_Framework_TestCase {
 		$insert_id_2 = $man1->set($this->mysqli); 
 		array_push($this->insert_ids, $insert_id_2);
 		
-		$this->assertNotEquals($this->mysqli->error, NULL);
+		$this->assertEquals($this->mysqli->affected_rows, -1);
+	}
+	
+	
+	// Name is a required field
+	public function testNameRequired() {
+		
+		$man1 = new Manufacturer(); 
+		$man1->phone_number = "123-456-7890 " . microtime(); // We need unique phones
+		$man1->email = "foo@bar.com";
+		$man1->website_url = "http://www.foo.com/";
+		$insert_id = $man1->set($this->mysqli); 
+		array_push($this->insert_ids, $insert_id);
+	
+		$this->assertEquals($this->mysqli->affected_rows, -1);
 
 	}
+	
+	// Phone Number is a required field
+	public function testPhoneRequired() {
+		
+		$man1 = new Manufacturer(); 
+		$man1->name = "Foo"; 
+		$man1->email = "foo@bar.com";
+		$man1->website_url = "http://www.foo.com/";
+		$insert_id = $man1->set($this->mysqli); 
+		array_push($this->insert_ids, $insert_id);
+	
+		$this->assertEquals($this->mysqli->affected_rows, -1);
+
+	}
+	// Email is a required field
+	public function testEmailRequired() {
+		
+		$man1 = new Manufacturer(); 
+		$man1->name = "Foo"; 
+		$man1->phone_number = "123-456-7890 " . microtime(); // We need unique phones
+		$man1->website_url = "http://www.foo.com/";
+		$insert_id = $man1->set($this->mysqli); 
+		array_push($this->insert_ids, $insert_id);
+	
+		$this->assertEquals($this->mysqli->affected_rows, -1);
+	}
+	
+	// Website is a required field
+	public function testWebsiteRequired() {
+		
+		$man1 = new Manufacturer(); 
+		$man1->name = "Foo"; 
+		$man1->phone_number = "123-456-7890 " . microtime(); // We need unique phones
+		$man1->email = "foo@bar.com";
+		$insert_id = $man1->set($this->mysqli); 
+		array_push($this->insert_ids, $insert_id);
+	
+		$this->assertEquals($this->mysqli->affected_rows, -1);
+	}	
 }
 ?>	
